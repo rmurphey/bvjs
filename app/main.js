@@ -6,38 +6,21 @@ require([
   "use!backbone",
 
   // Modules
-  "modules/example"
+  "modules/search"
 ],
 
-function(namespace, jQuery, Backbone, Example) {
+function(namespace, jQuery, Backbone, Search) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     routes: {
-      "": "index",
-      ":hash": "index"
+      "": "search",
+      ":hash": "search"
     },
 
-    index: function(hash) {
-      var route = this;
-      var tutorial = new Example.Views.Tutorial();
-
-      // Attach the tutorial to the DOM
-      tutorial.render(function(el) {
-        $("#main").html(el);
-
-        // Fix for hashes in pushState and hash fragment
-        if (hash && !route._alreadyTriggered) {
-          // Reset to home, pushState support automatically converts hashes
-          Backbone.history.navigate("", false);
-
-          // Trigger the default browser behavior
-          location.hash = hash;
-
-          // Set an internal flag to stop recursive looping
-          route._alreadyTriggered = true;
-        }
-      });
+    search : function(hash) {
+      var route = this,
+          search = Search.init();
     }
   });
 
@@ -65,8 +48,7 @@ function(namespace, jQuery, Backbone, Example) {
     var protocol = this.protocol + "//";
 
     // Ensure the protocol is not part of URL, meaning its relative.
-    if (href && href.slice(0, protocol.length) !== protocol &&
-        href.indexOf("javascript:") !== 0) {
+    if (href && href.slice(0, protocol.length) !== protocol) {
       // Stop the default event to ensure the link will not cause a page
       // refresh.
       evt.preventDefault();
