@@ -1,6 +1,6 @@
 define([
   "namespace",
-  "use!Backbone"
+  "use!backbone"
 ], function(app, B) {
   return function(c) {
     return {
