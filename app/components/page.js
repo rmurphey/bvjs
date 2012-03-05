@@ -15,6 +15,16 @@ define([
             self[this.getAttribute('data-attachPoint')] = $(this);
           });
         });
+      },
+
+      place : function(instance, location) {
+        var self = this;
+
+        instance.render().then(function(component) {
+          self[location].html(component);
+        });
+
+        return instance;
       }
     };
   };

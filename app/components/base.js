@@ -3,13 +3,15 @@ define([
   "use!backbone"
 ], function(app, Backbone) {
   return function(config) {
-    config.render = config.render || function(destinationNode) {
-      var el = this.$el;
+    config.render = function() {
+      var el = this.$el,
+          dfd = $.Deferred();
 
       this.fetchTemplate(function(t) {
-        el.html(t());
-        destinationNode.html(el);
+        dfd.resolve(el.html(t()));
       });
+
+      return dfd.promise();
     };
 
     config.fetchTemplate = function(done) {

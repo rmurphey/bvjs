@@ -10,27 +10,21 @@ define([
 ], function(app, B, Page, SearchInput, SearchResults, searchService) {
   return {
     init : function() {
-      var page = new Page({ template : 'app/templates/pages/search.html' }),
-          searchInput = new SearchInput(),
-          searchResults = new SearchResults(),
-          self = this;
+      var p = new Page({ template : 'app/templates/pages/search.html' });
 
-      $.when(page.render()).then(function() {
-        searchInput.render(page.searchInput);
-        searchResults.render(page.searchResults);
-        searchInput.on('search', _.bind(self.handleSearch, self));
-      });
-
-      this.searchResults = searchResults;
-      this.searchInput = searchInput;
+      p.render().then(_.bind(function() {
+        this.searchInput = p.place(new SearchInput(), 'searchInput');
+        this.searchResults = p.place(new SearchResults(), 'searchResults');
+        this.searchInput.on('search', _.bind(this.handleSearch, this));
+      }, this));
     },
 
     handleSearch : function(term) {
-      var searchResults = this.searchResults;
+      searchService.query(term).then(_.bind(this.showResults, this));
+    },
 
-      searchService.query(term).then(function(results) {
-        searchResults.show(results);
-      });
+    showResults : function(results) {
+      this.searchResults.show(results);
     }
   };
 });
