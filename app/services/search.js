@@ -13,7 +13,7 @@ define([
 
   return {
     query : function(term) {
-      var req = $.getJSON('http://search.twitter.com/search.json?callback=?&q=' + term),
+      var req = $.getJSON('http://search.twitter.com/search.json?callback=?&q=' + escape(term)),
           dfd = $.Deferred();
 
       req.then(function(resp) {

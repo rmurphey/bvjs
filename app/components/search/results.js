@@ -6,6 +6,8 @@ define([
   return Component({
     template : "app/templates/search/results.html",
     resultTemplate : "app/templates/search/result.html",
+    className : 'search-results',
+    tagName : 'ul',
 
     show : function(Results) {
       var el = this.$el;

@@ -4,6 +4,7 @@ define([
 ], function(app, Component) {
   return Component({
     template : "app/templates/search/input.html",
+    className : 'search-input',
 
     events : {
       "submit form"    :   "_onSubmit"

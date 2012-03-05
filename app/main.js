@@ -5,8 +5,8 @@ require([
   "jquery",
   "use!backbone",
 
-  // Modules
-  "modules/search"
+  // Mediators
+  "mediators/search"
 ],
 
 function(namespace, jQuery, Backbone, Search) {
