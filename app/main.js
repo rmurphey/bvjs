@@ -5,22 +5,21 @@ require([
   "jquery",
   "use!backbone",
 
-  // Mediators
-  "mediators/search"
+  // Controllers
+  "controllers/search"
 ],
 
-function(namespace, jQuery, Backbone, Search) {
+function(namespace, jQuery, Backbone, SearchController) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     routes: {
-      "": "search",
-      ":hash": "search"
+      "": "twitter",
+      ":hash": "twitter"
     },
 
-    search : function(hash) {
-      var route = this,
-          search = Search.init();
+    twitter : function(hash) {
+      SearchController.init();
     }
   });
 
