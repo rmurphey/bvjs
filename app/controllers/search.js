@@ -6,8 +6,8 @@ define([
   "components/search/input",
   "components/search/results",
 
-  "services/search"
-], function(app, B, Page, SearchInput, SearchResults, searchService) {
+  "services/twitter"
+], function(app, B, Page, SearchInput, SearchResults, twitterService) {
   return {
     init : function() {
       this.page = new Page({ template : 'app/templates/pages/search.html' });
@@ -24,7 +24,7 @@ define([
     },
 
     handleSearch : function(term) {
-      searchService.query(term).then(_.bind(this.showResults, this));
+      twitterService.query(term).then(_.bind(this.showResults, this));
     },
 
     showResults : function(results) {
