@@ -1,7 +1,7 @@
 define([
   "use!backbone"
 ], function(Backbone) {
-  var Result = Backbone.Model.extend({
+  var TwitterResult = Backbone.Model.extend({
     validate : function(attrs) {
       _.each([ 'text', 'from_user' ], function(attr) {
         if (!attrs[attr]) { return "No " + attr; }
@@ -9,7 +9,10 @@ define([
     }
   });
 
-  var Results = Backbone.Collection.extend({ model : Result });
+  var TwitterResults = Backbone.Collection.extend({
+    type : 'twitter',
+    model : TwitterResult
+  });
 
   return {
     query : function(term) {
@@ -17,8 +20,7 @@ define([
           dfd = $.Deferred();
 
       req.then(function(resp) {
-        var results = new Results(resp.results);
-        dfd.resolve(results);
+        dfd.resolve(new TwitterResults(resp.results));
       });
 
       return dfd.promise();
