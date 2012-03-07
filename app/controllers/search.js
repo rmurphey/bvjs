@@ -1,13 +1,9 @@
 define([
-  "namespace",
-  "use!backbone",
-
   "components/page",
   "components/search/input",
   "components/search/results",
-
   "services/twitter"
-], function(app, B, Page, SearchInput, SearchResults, twitterService) {
+], function(Page, SearchInput, SearchResults, twitterService) {
   return {
     init : function() {
       this.page = new Page({ template : 'app/templates/pages/search.html' });
