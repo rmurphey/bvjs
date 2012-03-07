@@ -16,7 +16,7 @@ define([
 
   return {
     query : function(term) {
-      var req = $.getJSON('http://search.twitter.com/search.json?callback=?&q=' + escape(term)),
+      var req = $.getJSON('http://search.twitter.com/search.json?callback=?&q=' + encodeURIComponent(term)),
           dfd = $.Deferred();
 
       req.then(function(resp) {
