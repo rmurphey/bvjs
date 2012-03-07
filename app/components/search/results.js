@@ -1,8 +1,7 @@
 define([
   "namespace",
-  "use!backbone",
   "components/base"
-], function(app, Backbone, Component) {
+], function(app, Component) {
   return Component({
     template : "app/templates/search/results.html",
     className : 'search-results',
